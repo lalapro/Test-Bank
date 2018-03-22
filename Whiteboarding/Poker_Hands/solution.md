@@ -57,7 +57,7 @@ We know that out of our three helper functions, two return a boolean and one ret
 
 Then we just write a bunch of if statements that correspond to our table.
 
-```
+```javascript
 if(isSuited && isRange) {
     if(frequencies[4][0] === '13' && frequencies[0][0] === '1') {
       return 'Royal Flush'
@@ -72,7 +72,7 @@ We know that if isSuited && isRange is true, there are only two possible outcome
 
 Looking back at our table, we can use process of elimination with our boolean values, however, if both are false, then things get a little bit trickier. Let's look at what we should do when comparing frequencies only.
 
-```
+```javascript
 if (frequencies.length === 2) {
   if (frequencies[0][1] === 4) {
     return 'Four of a Kind'
@@ -93,7 +93,7 @@ We can simply do this for the rest of our table, provided that we actually have 
 # Actual code
 Let's write our helper functions, starting with `checkFrequencies`
 #### checkFrequencies (helper function)
-```
+```javascript
 let checkFrequencies = (hand) => {
   // create an object to store frequencies
   let hashMap = {};
@@ -119,7 +119,7 @@ let checkFrequencies = (hand) => {
 * One issue with this solution are the Aces, since they can work both ways (1,2,3,4,5) || (10,11,12,13,1)
 *  My approach is to create two arrays and reuse our iteration, one where Ace is represented by 1, and the other were it is represented by 14
 *  Then we can simply run both arrays using the same rules in our iteration, if any of the arrays return true, we can return true for the whole function
-```
+```javascript
 let checkRange = (hand) => {
   // create a new array of consisting of just the card numbers by slicing off the suit (last character)
   let cardNumbers = hand.map(card => Number(card.slice(0, card.length - 1)));
@@ -141,7 +141,7 @@ return cardNumbers || cardNumbersWithAce
 }
 ```
 
-```
+```javascript
 let isOrdered = (array) => {
 // iterate through the array, if at any point after the first card the numbers aren't consecutive, return false
 return array.every((card, i) => {
@@ -157,7 +157,7 @@ return array.every((card, i) => {
 
 This one is fairly simple and there are a lot of different ways you can implement this
 
-```
+```javascript
 let checkSuited = (hand) => {
   // get suit from first card
   let suit =  hand[0][hand[0].length - 1];
